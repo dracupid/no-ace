@@ -1,5 +1,5 @@
 config =
-    startDir: '../..'
+    startDir: '..'
     port: '8998'
 
 
@@ -39,7 +39,7 @@ service.get '/', (req, res)->
     kit.log req.path
     path = req.query.read
     if not path
-        return res.send usage host: req.headers.host, rootDir: config.startDir
+        return res.send usage host: req.headers.host, rootDir: kit.path.normalize process.cwd(), config.startDir
 
     kit.readFile path
     .then (data)->

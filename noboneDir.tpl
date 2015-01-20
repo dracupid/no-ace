@@ -40,16 +40,12 @@
 	%>
 
 		<div class='item'>
-			<% if (source) { %>
-				<a class='source' title='view source code' href="<%= el.path %>?source" target="_blank">
+			<% if (source && ! /\.jpg|\.png|\.gif|\.exe|\.psd|\.mp3|\.aac|\.zip|\.rar$/.test(el.path)) { %>
+				<a class='source' title='view source code' href="/?read=__PWD__<%= path %><%= el.path %>" target="_blank">
 					&lt;&gt;&nbsp;
 				</a>
 			<% } %>
-			<%if(source && ! /\.jpg|\.png|\.gif|\.exe|\.psd|\.mp3|\.aac|\.zip|\.rar$/.test(el.path)){%>
-				<a class="name" href="/?read=__PWD__<%= path %><%= el.path %>">
-			<%} else {%>
 				<a class="name" href="<%= el.path %>">
-			<%}%>
 				<%= el.path %>
 			</a>
 			<div class="dirCount">
