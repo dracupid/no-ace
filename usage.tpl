@@ -11,6 +11,5 @@
 	<li>
 		使用nobone静态资源服务浏览文件 <a href="/pre"> <%= host %>/pre </a>, 点击文件可进入编辑器
 	</li>
-	<br/><br/>
 	Notice: 静态资源根目录为：<%= rootDir %>
 </ol>
