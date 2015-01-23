@@ -43,6 +43,7 @@
       border-radius: 0.2em;
       zoom: 1;
       font-size: 14px;
+      z-index: 99999;
     }
     #save:hover, #save:focus, #save:active{
         border-color: #3072b3;
