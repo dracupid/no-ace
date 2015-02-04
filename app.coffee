@@ -1,12 +1,16 @@
-config =
-    startDir: '..'
-    port: '8998'
-
+HOME = if process.platform is 'win32' then process.env.USERPROFILE else process.env.HOME
 
 nobone = require 'nobone'
 process.env.NODE_ENV = 'development'
 
 { kit, service, renderer} = nobone null, checkUpgrade: false
+kit.require 'colors'
+
+config = kit._.defaults require './config',
+    startDir: HOME
+    port: '8998'
+
+config.startDir is '$HOME' and config.startDir = HOME
 
 tpl = kit._.template kit.fs.readFileSync 'editor.tpl'
 editor = '' + kit.fs.readFileSync 'kitchen-sink.html'
@@ -43,8 +47,11 @@ service.get '/', (req, res)->
 
     kit.readFile path
     .then (data)->
-        language = kit.path.extname(path)[1..]
-        language = nameMap[language.toLowerCase()] or language
+        language = kit.path.extname(path)[1...]
+        if not language
+            language = 'sh'
+        else
+            language = nameMap[language.toLowerCase()] or language
         res.send tpl
             code: kit._.escape data + ''
             language: language
